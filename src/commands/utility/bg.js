@@ -1,5 +1,5 @@
-const { interactionError } = require("../../lib/interaction-error");
 const { SlashCommandBuilder, AttachmentBuilder } = require("discord.js");
+const { interactionError } = require("../../lib/interaction-error");
 const { createCanvas } = require("canvas");
 
 module.exports = {
