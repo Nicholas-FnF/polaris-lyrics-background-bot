@@ -5,9 +5,7 @@ const { createCanvas } = require("canvas");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("bg")
-    .setDescription(
-      "Generates and sends a gradient background with a dominant color."
-    ),
+    .setDescription("Generates a gradient background."),
 
   async execute(interaction) {
     try {
