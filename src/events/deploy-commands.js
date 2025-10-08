@@ -28,7 +28,9 @@ for (const folder of commandFolders) {
   }
 }
 
-const rest = new REST().setToken(process.env.TOKEN);
+const rest = new REST().setToken(
+  process.env.POLARIS_LYRICS_BACKGROUND_BOT_TOKEN
+);
 
 (async () => {
   try {

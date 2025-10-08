@@ -53,4 +53,4 @@ for (const file of eventFiles) {
   }
 }
 
-client.login(process.env.TOKEN);
+client.login(process.env.POLARIS_LYRICS_BACKGROUND_BOT_TOKEN);
