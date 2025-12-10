@@ -11,6 +11,14 @@ module.exports = {
         .setName("image")
         .setDescription("Image to resize")
         .setRequired(true)
+    )
+    .addIntegerOption((option) =>
+      option
+        .setName("darken")
+        .setDescription("Percentage to darken the image (0-100, default: 0)")
+        .setMinValue(0)
+        .setMaxValue(100)
+        .setRequired(false)
     ),
 
   async execute(interaction) {
@@ -44,14 +52,16 @@ module.exports = {
 
       ctx.drawImage(img, dx, dy, nw, nh);
 
-      // Darken the resulting image by 25% by drawing a semi-transparent black overlay
-      ctx.fillStyle = "rgba(0,0,0,0.25)";
-      ctx.fillRect(0, 0, width, height);
+      // Apply darkening if specified
+      const darkenPercent = interaction.options.getInteger("darken") ?? 0;
+      if (darkenPercent > 0) {
+        const alpha = darkenPercent / 100;
+        ctx.fillStyle = `rgba(0,0,0,${alpha})`;
+        ctx.fillRect(0, 0, width, height);
+      }
 
       const buffer = canvas.toBuffer("image/png");
-      const outName = `resized-${
-        attachment.name ? attachment.name.replace(/\s+/g, "-") : "image"
-      }.png`;
+      const outName = "resized.png";
       const file = new AttachmentBuilder(buffer, { name: outName });
 
       await interaction.editReply({
